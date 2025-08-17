@@ -21,6 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={`${inter.className} h-full bg-gray-50 antialiased`}>
+        <a href="#main-content" className="skip-to-main">
+          Skip to main content
+        </a>
         <Providers>
           {children}
           <Toaster />

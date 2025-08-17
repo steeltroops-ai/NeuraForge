@@ -73,7 +73,7 @@ const lineVariants = {
 
 export function HowItWorksSection() {
   return (
-    <section className="relative py-32 bg-surface-primary overflow-hidden">
+    <section className="relative py-24 bg-surface-primary overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-surface-primary via-surface-secondary to-surface-primary" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(99,102,241,0.1),transparent_50%)]" />
@@ -86,7 +86,7 @@ export function HowItWorksSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto max-w-3xl text-center mb-20"
+          className="mx-auto max-w-3xl text-center mb-16"
         >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-quantum-500/10 border border-quantum-500/20 mb-6">
             <Sparkles className="h-4 w-4 text-quantum-400 mr-2" />
@@ -95,7 +95,7 @@ export function HowItWorksSection() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-6">
             How{' '}
             <span className="bg-gradient-to-r from-quantum-400 via-neural-400 to-processing-400 bg-clip-text text-transparent">
               NeuraForge OS
@@ -103,14 +103,14 @@ export function HowItWorksSection() {
             works
           </h2>
 
-          <p className="text-xl leading-relaxed text-neutral-300 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl leading-relaxed text-neutral-300 max-w-2xl mx-auto">
             Our intuitive workflow is designed to match how researchers naturally think and work,
             enhanced with AI-powered capabilities.
           </p>
         </motion.div>
 
         {/* Steps Timeline */}
-        <div className="relative mx-auto max-w-4xl">
+        <div className="relative mx-auto max-w-4xl mt-8">
           {/* Connecting Line */}
           <motion.div
             variants={lineVariants}
@@ -157,13 +157,13 @@ export function HowItWorksSection() {
                     >
                       <CardContent>
                         <div className="flex items-start justify-between mb-4">
-                          <h3 className="text-2xl font-semibold text-white group-hover:text-neural-300 transition-colors duration-300">
+                          <h3 className="text-lg font-semibold text-white group-hover:text-neural-300 transition-colors duration-300">
                             {step.name}
                           </h3>
                           <CheckCircle className="h-6 w-6 text-neural-400 flex-shrink-0 ml-4" />
                         </div>
 
-                        <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors duration-300 mb-4">
+                        <p className="text-sm text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors duration-300 mb-4">
                           {step.description}
                         </p>
 

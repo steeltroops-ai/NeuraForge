@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-surface-background">
       <FuturisticHeader />
-      <main>
+      <main id="main-content">
         <FuturisticHero />
         <FeaturesSection />
         <HowItWorksSection />

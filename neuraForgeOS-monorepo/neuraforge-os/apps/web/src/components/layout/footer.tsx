@@ -74,13 +74,13 @@ export function Footer() {
       <div className="absolute inset-0 bg-gradient-to-t from-surface-primary/50 to-surface-background" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(99,102,241,0.1),transparent_70%)]" />
 
-      <div className="relative mx-auto max-w-7xl px-6 pb-8 pt-20 lg:px-8 lg:pt-24">
+      <div className="relative mx-auto max-w-7xl px-6 pb-8 pt-16 lg:px-8 lg:pt-20">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8"
         >
           {/* Brand Section */}
           <motion.div variants={itemVariants} className="lg:col-span-4">

@@ -176,10 +176,10 @@ const StatsCounter = ({ end, label, suffix = "" }: { end: number; label: string;
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
     >
-      <div className="text-4xl font-bold text-white mb-2">
+      <div className="text-2xl md:text-3xl font-bold text-white mb-2">
         {count.toLocaleString()}{suffix}
       </div>
-      <div className="text-neutral-400 text-sm uppercase tracking-wider">
+      <div className="text-neutral-400 text-xs uppercase tracking-wider">
         {label}
       </div>
     </motion.div>
@@ -197,42 +197,37 @@ export const FuturisticHero = () => {
   const ySpring = useSpring(y, springConfig);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-surface-background via-surface-primary to-surface-secondary">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-surface-background via-surface-primary to-surface-secondary pt-20 pb-16">
       {/* Neural Network Background */}
       <NeuralNetworkBackground />
       
       {/* Floating Particles */}
-      {Array.from({ length: 20 }).map((_, i) => (
-        <FloatingParticle 
-          key={i} 
-          delay={i * 2} 
-          duration={15 + Math.random() * 10} 
-        />
-      ))}
+      <div className="absolute inset-0 overflow-hidden">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <FloatingParticle key={i} delay={i * 0.3} />
+        ))}
+      </div>
 
-      {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-neural-500/10 via-transparent to-quantum-500/10" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface-background/80" />
+      {/* Subtle Gradient Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-surface-background/90 via-transparent to-surface-background/60" />
+      <div className="absolute inset-0 bg-gradient-to-r from-neural-500/3 via-transparent to-quantum-500/3" />
 
       {/* Main Content */}
       <motion.div
         style={{ y: ySpring, opacity, scale }}
-        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center"
+        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-16 text-center"
       >
         {/* Announcement Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8 flex justify-center"
+          transition={{ duration: 0.6 }}
+          className="mb-16"
         >
-          <div className="group relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-neural-500 to-quantum-500 rounded-full blur opacity-25 group-hover:opacity-40 transition duration-300" />
-            <div className="relative flex items-center space-x-3 rounded-full bg-surface-glass backdrop-blur-xl px-6 py-3 text-sm font-medium text-white border border-white/10">
-              <Stars className="h-4 w-4 text-neural-400" />
-              <span>Introducing the Future of AI-Native Research</span>
-              <ArrowRight className="h-4 w-4 text-neural-400 group-hover:translate-x-1 transition-transform" />
-            </div>
+          <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-neural-500/10 to-quantum-500/10 border border-white/20 backdrop-blur-sm">
+            <Stars className="w-4 h-4 text-neural-400 mr-3" />
+            <span className="text-sm text-white font-medium">Introducing the Future of AI-Native Research</span>
+            <ArrowRight className="w-4 h-4 text-neural-400 ml-3" />
           </div>
         </motion.div>
 
@@ -240,12 +235,12 @@ export const FuturisticHero = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-8"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-12"
         >
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold leading-tight tracking-tight">
-            <span className="block text-white">Neural</span>
-            <span className="block bg-gradient-to-r from-neural-400 via-quantum-400 to-processing-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight tracking-tight">
+            <span className="block text-white mb-2">Neural</span>
+            <span className="block bg-gradient-to-r from-neural-400 via-quantum-400 to-processing-400 bg-clip-text text-transparent mb-2">
               Research
             </span>
             <span className="block text-white">Ecosystem</span>
@@ -257,12 +252,12 @@ export const FuturisticHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="max-w-4xl mx-auto text-xl md:text-2xl text-neutral-300 leading-relaxed mb-12"
+          className="max-w-4xl mx-auto text-base md:text-lg text-neutral-300 leading-relaxed mb-16"
         >
           Transform scientific discovery with{' '}
-          <span className="text-neural-400 font-semibold">AI-powered insights</span>,{' '}
-          <span className="text-quantum-400 font-semibold">quantum-speed collaboration</span>, and{' '}
-          <span className="text-processing-400 font-semibold">neural research trees</span>.
+          <span className="text-neural-400 font-medium">AI-powered insights</span>,{' '}
+          <span className="text-quantum-400 font-medium">quantum-speed collaboration</span>, and{' '}
+          <span className="text-processing-400 font-medium">neural research trees</span>.
           <br />
           <span className="text-white font-semibold">Join 50,000+ researchers</span> accelerating breakthrough discoveries.
         </motion.p>
@@ -272,30 +267,25 @@ export const FuturisticHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
+          className="flex flex-col sm:flex-row items-center justify-center gap-8 mb-24"
         >
-          <Link href="/auth/register">
-            <FuturisticButton
-              variant="neural"
-              size="xl"
-              rightIcon={<ArrowRight className="h-6 w-6" />}
-              glowEffect
-              className="min-w-[200px]"
-            >
-              Start Research Journey
-            </FuturisticButton>
-          </Link>
+          <FuturisticButton
+            variant="neural"
+            size="xl"
+            rightIcon={<ArrowRight className="h-5 w-5" />}
+            className="min-w-[220px] px-8 py-4"
+          >
+            Start Research Journey
+          </FuturisticButton>
           
-          <Link href="#demo">
-            <FuturisticButton
-              variant="glass"
-              size="xl"
-              leftIcon={<Play className="h-6 w-6" />}
-              className="min-w-[200px]"
-            >
-              Watch Neural Demo
-            </FuturisticButton>
-          </Link>
+          <FuturisticButton
+            variant="ghost"
+            size="xl"
+            leftIcon={<Play className="h-5 w-5" />}
+            className="min-w-[200px] px-8 py-4"
+          >
+            Watch Neural Demo
+          </FuturisticButton>
         </motion.div>
 
         {/* Feature Showcase Cards */}
@@ -303,18 +293,18 @@ export const FuturisticHero = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6 lg:px-8 pb-16"
         >
           {/* AI Processing Card */}
-          <NeuralCard variant="neural" interactive glowEffect>
+          <NeuralCard variant="neural" interactive>
             <CardContent>
-              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-neural-500 to-neural-600 rounded-2xl shadow-glow">
+              <div className="flex items-center justify-center w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-neural-500/80 to-neural-600/80 rounded-xl shadow-sm">
                 <Cpu className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">
+              <h3 className="text-base font-semibold text-white mb-2">
                 Neural AI Processing
               </h3>
-              <p className="text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-400 leading-relaxed">
                 Advanced AI models generate hypotheses, discover patterns, and accelerate research with quantum-speed processing.
               </p>
             </CardContent>
@@ -326,10 +316,10 @@ export const FuturisticHero = () => {
               <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-quantum-500 to-quantum-600 rounded-2xl shadow-quantum">
                 <Orbit className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">
+              <h3 className="text-base font-semibold text-white mb-3">
                 Quantum Collaboration
               </h3>
-              <p className="text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-400 leading-relaxed">
                 Real-time synchronized workspaces connecting researchers globally with quantum-entangled data sharing.
               </p>
             </CardContent>
@@ -341,10 +331,10 @@ export const FuturisticHero = () => {
               <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-processing-500 to-processing-600 rounded-2xl shadow-processing">
                 <Workflow className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">
+              <h3 className="text-base font-semibold text-white mb-3">
                 Neural Research Trees
               </h3>
-              <p className="text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-400 leading-relaxed">
                 Version-controlled discovery workflows that preserve every hypothesis and experiment in neural networks.
               </p>
             </CardContent>

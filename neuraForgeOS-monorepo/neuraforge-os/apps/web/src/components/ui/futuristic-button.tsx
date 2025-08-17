@@ -123,7 +123,7 @@ export const FuturisticButton = forwardRef<HTMLButtonElement, FuturisticButtonPr
       sizeStyles,
       
       // Conditional styles
-      glowEffect && "animate-glow",
+      glowEffect && "shadow-md shadow-neural-500/10",
       pulseEffect && "animate-pulse",
       
       // Custom className
@@ -144,15 +144,15 @@ export const FuturisticButton = forwardRef<HTMLButtonElement, FuturisticButtonPr
         {...motionProps}
         {...props}
       >
-        {/* Background Glow Effect */}
+        {/* Subtle professional glow effect */}
         {glowEffect && (
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-neural-400/20 to-neural-600/20 rounded-inherit"
+            className="absolute inset-0 bg-gradient-to-r from-neural-400/8 to-neural-600/8 rounded-inherit"
             animate={{
-              opacity: [0.5, 1, 0.5],
+              opacity: [0, 0.15, 0],
             }}
             transition={{
-              duration: 2,
+              duration: 3,
               repeat: Infinity,
               ease: "easeInOut",
             }}

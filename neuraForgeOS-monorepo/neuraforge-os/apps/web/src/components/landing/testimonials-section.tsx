@@ -69,7 +69,7 @@ const cardVariants = {
 
 export function TestimonialsSection() {
   return (
-    <section className="relative py-32 bg-surface-background overflow-hidden">
+    <section className="relative py-24 bg-surface-background overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-surface-background via-surface-primary/30 to-surface-background" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.1),transparent_70%)]" />
@@ -81,7 +81,7 @@ export function TestimonialsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto max-w-3xl text-center mb-20"
+          className="mx-auto max-w-3xl text-center mb-16"
         >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-processing-500/10 border border-processing-500/20 mb-6">
             <Star className="h-4 w-4 text-processing-400 mr-2" />
@@ -90,14 +90,14 @@ export function TestimonialsSection() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-6">
             Trusted by{' '}
             <span className="bg-gradient-to-r from-processing-400 via-neural-400 to-quantum-400 bg-clip-text text-transparent">
               leading researchers
             </span>
           </h2>
 
-          <p className="text-xl leading-relaxed text-neutral-300 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl leading-relaxed text-neutral-300 max-w-2xl mx-auto">
             See what researchers from top institutions are saying about NeuraForge OS and how it's transforming their work.
           </p>
         </motion.div>
@@ -108,7 +108,7 @@ export function TestimonialsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8"
         >
           {testimonials.map((testimonial, testimonialIdx) => (
             <motion.div key={testimonialIdx} variants={cardVariants}>
@@ -116,7 +116,6 @@ export function TestimonialsSection() {
                 variant="glass"
                 size="lg"
                 interactive
-                glowEffect
                 className="h-full group hover:scale-105 transition-all duration-300"
               >
                 <CardContent>

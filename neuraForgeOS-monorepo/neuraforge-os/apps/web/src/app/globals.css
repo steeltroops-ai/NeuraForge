@@ -305,6 +305,81 @@
   }
 }
 
+/* Accessibility Focus Styles */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+[tabindex]:focus {
+  outline: 2px solid #0066FF !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2) !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #0066FF !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2) !important;
+}
+
+/* Override any existing focus styles */
+.skip-to-main:focus {
+  outline: 2px solid #FFFFFF !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .text-neural-400,
+  .text-muted-foreground {
+    color: #FFFFFF !important;
+  }
+  
+  .bg-surface-background {
+    background-color: #000000 !important;
+  }
+  
+  .border-neural-800 {
+    border-color: #FFFFFF !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Skip to main content link */
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #0066FF;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.skip-to-main:focus {
+  top: 6px;
+}
+
 /* Print Styles */
 @media print {
   .neural-glow,

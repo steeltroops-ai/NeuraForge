@@ -180,11 +180,11 @@ export const OptimizedImage = ({
 };
 
 // Virtual Scrolling Hook
-export const useVirtualScroll = <T>(
+export const useVirtualScroll = function<T>(
   items: T[],
   itemHeight: number,
   containerHeight: number
-) => {
+) {
   const [scrollTop, setScrollTop] = useState(0);
 
   const visibleStart = Math.floor(scrollTop / itemHeight);
@@ -336,7 +336,10 @@ export const monitorCoreWebVitals = () => {
   new PerformanceObserver((list) => {
     const entries = list.getEntries();
     entries.forEach((entry) => {
-      console.log('FID:', entry.processingStart - entry.startTime);
+      const fidEntry = entry as PerformanceEventTiming;
+      if (fidEntry.processingStart) {
+        console.log('FID:', fidEntry.processingStart - fidEntry.startTime);
+      }
     });
   }).observe({ entryTypes: ['first-input'] });
 

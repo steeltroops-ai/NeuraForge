@@ -60,7 +60,7 @@ const itemVariants = {
 
 export function CTASection() {
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section className="relative py-24 overflow-hidden">
       {/* Neural Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-neural-600 via-quantum-600 to-processing-600" />
       <div className="absolute inset-0 bg-gradient-to-t from-surface-background/20 via-transparent to-surface-background/20" />
@@ -79,7 +79,7 @@ export function CTASection() {
         >
           {/* Main CTA Content */}
           <div className="mb-16">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-8">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-8">
               Ready to{' '}
               <span className="bg-gradient-to-r from-white via-neural-100 to-quantum-100 bg-clip-text text-transparent">
                 revolutionize
@@ -87,19 +87,18 @@ export function CTASection() {
               your research?
             </h2>
 
-            <p className="mx-auto max-w-2xl text-xl leading-relaxed text-white/90 mb-12">
+            <p className="mx-auto max-w-2xl text-lg md:text-xl leading-relaxed text-white/90 mb-16">
               Join thousands of researchers who are already using NeuraForge OS to accelerate their discoveries.
               Start your free trial today and experience the future of research.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-8">
               <Link href="/auth/register">
                 <FuturisticButton
                   variant="glass"
                   size="xl"
                   rightIcon={<ArrowRight className="h-6 w-6" />}
-                  glowEffect
                   className="min-w-[240px] bg-white/10 hover:bg-white/20 text-white border-white/20"
                 >
                   Get started for free

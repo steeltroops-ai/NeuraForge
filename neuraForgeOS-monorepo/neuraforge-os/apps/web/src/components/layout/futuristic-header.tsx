@@ -84,11 +84,11 @@ const MegaMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void })
                         <div className="flex items-center justify-center w-10 h-10 bg-neural-500/20 rounded-lg group-hover:bg-neural-500/30 transition-colors">
                           <item.icon className="h-5 w-5 text-neural-400" />
                         </div>
-                        <h3 className="text-lg font-semibold text-white group-hover:text-neural-400 transition-colors">
+                        <h3 className="text-base font-semibold text-white group-hover:text-neural-400 transition-colors">
                           {item.name}
                         </h3>
                       </div>
-                      <p className="text-neutral-400 text-sm leading-relaxed">
+                      <p className="text-neutral-400 text-xs leading-relaxed">
                         {item.description}
                       </p>
                     </Link>
@@ -221,8 +221,8 @@ export const FuturisticHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const { scrollY } = useScroll();
-  const headerOpacity = useTransform(scrollY, [0, 100], [0.8, 0.95]);
-  const headerBlur = useTransform(scrollY, [0, 100], [8, 20]);
+  const headerOpacity = useTransform(scrollY, [0, 100], [0.9, 0.98]);
+  const headerBlur = useTransform(scrollY, [0, 100], [12, 24]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -253,8 +253,8 @@ export const FuturisticHeader = () => {
       }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-surface-background/95 border-b border-white/10 shadow-lg' 
-          : 'bg-transparent'
+          ? 'bg-surface-background/98 border-b border-white/20 shadow-xl backdrop-blur-xl' 
+          : 'bg-surface-background/80 backdrop-blur-md'
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-8">

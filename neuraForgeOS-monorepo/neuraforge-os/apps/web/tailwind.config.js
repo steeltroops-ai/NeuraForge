@@ -171,11 +171,11 @@ module.exports = {
       // Box Shadows
       boxShadow: {
         // Futuristic shadows
-        glow: "0 0 20px rgba(99, 102, 241, 0.3)",
-        glowLg: "0 0 40px rgba(99, 102, 241, 0.4)",
-        neural: "0 8px 32px rgba(99, 102, 241, 0.15)",
-        quantum: "0 8px 32px rgba(16, 185, 129, 0.15)",
-        processing: "0 8px 32px rgba(249, 115, 22, 0.15)",
+        glow: "0 0 15px rgba(99, 102, 241, 0.15)",
+        glowLg: "0 0 25px rgba(99, 102, 241, 0.2)",
+        neural: "0 4px 16px rgba(99, 102, 241, 0.08)",
+        quantum: "0 4px 16px rgba(16, 185, 129, 0.08)",
+        processing: "0 4px 16px rgba(249, 115, 22, 0.08)",
         
         // Enhanced standard shadows
         soft: "0 2px 8px rgba(0, 0, 0, 0.12)",
@@ -218,21 +218,27 @@ module.exports = {
           "100%": { opacity: "1", transform: "scale(1)" },
         },
         "glow": {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(99, 102, 241, 0.3)" },
-          "50%": { boxShadow: "0 0 40px rgba(99, 102, 241, 0.6)" },
+          "0%, 100%": {
+            boxShadow: "0 0 8px rgba(99, 102, 241, 0.1), 0 0 16px rgba(99, 102, 241, 0.05)",
+            transform: "scale(1)",
+          },
+          "50%": {
+            boxShadow: "0 0 12px rgba(99, 102, 241, 0.15), 0 0 24px rgba(99, 102, 241, 0.08)",
+            transform: "scale(1.01)",
+          },
         },
         "float": {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
         },
         "pulse-glow": {
-          "0%, 100%": { 
-            boxShadow: "0 0 20px rgba(99, 102, 241, 0.3)",
-            transform: "scale(1)"
+          "0%, 100%": {
+            opacity: "0.9",
+            boxShadow: "0 0 12px rgba(99, 102, 241, 0.2)",
           },
-          "50%": { 
-            boxShadow: "0 0 40px rgba(99, 102, 241, 0.6)",
-            transform: "scale(1.05)"
+          "50%": {
+            opacity: "1",
+            boxShadow: "0 0 20px rgba(99, 102, 241, 0.3)",
           },
         },
       },

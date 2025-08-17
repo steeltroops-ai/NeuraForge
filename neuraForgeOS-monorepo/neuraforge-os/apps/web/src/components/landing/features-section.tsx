@@ -82,11 +82,11 @@ const itemVariants = {
 
 export function FeaturesSection() {
   return (
-    <section className="relative py-32 bg-surface-background overflow-hidden">
+    <section className="relative py-24 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-surface-background via-surface-primary/50 to-surface-background" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(99,102,241,0.1),transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(168,85,247,0.1),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(16,185,129,0.1),transparent_50%)]" />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
@@ -95,7 +95,7 @@ export function FeaturesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto max-w-3xl text-center mb-20"
+          className="mx-auto max-w-4xl text-center mb-16"
         >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-neural-500/10 border border-neural-500/20 mb-6">
             <span className="text-sm font-medium text-neural-400 tracking-wide uppercase">
@@ -103,14 +103,14 @@ export function FeaturesSection() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-6">
             Accelerate your{' '}
             <span className="bg-gradient-to-r from-neural-400 via-quantum-400 to-processing-400 bg-clip-text text-transparent">
               research workflow
             </span>
           </h2>
 
-          <p className="text-xl leading-relaxed text-neutral-300 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl leading-relaxed text-neutral-300 max-w-2xl mx-auto">
             From hypothesis generation to publication, NeuraForge OS provides all the tools you need
             to conduct cutting-edge research efficiently and collaboratively.
           </p>
@@ -122,7 +122,7 @@ export function FeaturesSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8"
         >
           {features.map((feature, index) => (
             <motion.div key={feature.name} variants={itemVariants}>
@@ -130,7 +130,6 @@ export function FeaturesSection() {
                 variant="glass"
                 size="lg"
                 interactive
-                glowEffect
                 className="h-full group hover:scale-105 transition-all duration-300"
               >
                 <CardContent>
@@ -144,11 +143,11 @@ export function FeaturesSection() {
 
                   {/* Content */}
                   <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-white group-hover:text-neural-300 transition-colors duration-300">
+                    <h3 className="text-lg font-semibold text-white group-hover:text-neural-300 transition-colors duration-300">
                       {feature.name}
                     </h3>
 
-                    <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
+                    <p className="text-sm text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
                       {feature.description}
                     </p>
                   </div>

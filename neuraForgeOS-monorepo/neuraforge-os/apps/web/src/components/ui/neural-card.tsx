@@ -15,7 +15,7 @@ const cardVariants = {
   // Neural Glow Card
   neural: {
     base: "bg-surface-primary border border-neural-500/20 shadow-neural",
-    hover: "hover:border-neural-400/40 hover:shadow-glow",
+    hover: "hover:border-neural-400/20 hover:shadow-neural",
   },
   
   // Quantum Card
@@ -82,7 +82,6 @@ export const NeuralCard = forwardRef<HTMLDivElement, NeuralCardProps>(
       
       // Conditional styles
       interactive && "cursor-pointer",
-      glowEffect && "animate-glow",
       
       // Custom className
       className
@@ -90,8 +89,8 @@ export const NeuralCard = forwardRef<HTMLDivElement, NeuralCardProps>(
 
     const motionProps = interactive ? {
       whileHover: { 
-        scale: 1.02,
-        y: -4,
+        scale: 1.01,
+        y: -2,
       },
       whileTap: { scale: 0.98 },
       transition: { type: "spring", stiffness: 400, damping: 17 },
@@ -104,12 +103,12 @@ export const NeuralCard = forwardRef<HTMLDivElement, NeuralCardProps>(
         {...motionProps}
         {...props}
       >
-        {/* Background Glow Effect */}
+        {/* Subtle professional glow effect */}
         {glowEffect && (
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-neural-400/10 to-neural-600/10 rounded-inherit -z-10"
+            className="absolute inset-0 bg-gradient-to-r from-neural-500/5 via-quantum-500/5 to-processing-500/5 rounded-inherit -z-10"
             animate={{
-              opacity: [0.3, 0.7, 0.3],
+              opacity: [0, 0.1, 0],
             }}
             transition={{
               duration: 3,
@@ -127,7 +126,7 @@ export const NeuralCard = forwardRef<HTMLDivElement, NeuralCardProps>(
         {/* Interactive Ripple Effect */}
         {interactive && (
           <motion.div
-            className="absolute inset-0 bg-white/5 rounded-inherit opacity-0"
+            className="absolute inset-0 opacity-0 bg-white/5 rounded-inherit"
             whileHover={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
           />
@@ -172,7 +171,7 @@ export const CardTitle = ({ children, className, level = 3 }: CardTitleProps) =>
   
   return (
     <Tag className={cn(
-      "text-white leading-tight",
+      "leading-tight text-white",
       levelStyles[level],
       className
     )}>
@@ -188,7 +187,7 @@ interface CardDescriptionProps {
 }
 
 export const CardDescription = ({ children, className }: CardDescriptionProps) => (
-  <p className={cn("text-neutral-400 leading-relaxed", className)}>
+  <p className={cn("leading-relaxed text-neutral-400", className)}>
     {children}
   </p>
 );
@@ -212,7 +211,7 @@ interface CardFooterProps {
 }
 
 export const CardFooter = ({ children, className }: CardFooterProps) => (
-  <div className={cn("mt-6 pt-4 border-t border-neutral-700", className)}>
+  <div className={cn("pt-4 mt-6 border-t border-neutral-700", className)}>
     {children}
   </div>
 );
