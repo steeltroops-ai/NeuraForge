@@ -1,6 +1,5 @@
 ---
 type: "always_apply"
-description: "Example description"
 ---
 
 # Modern Design System Best Practices
@@ -85,13 +84,13 @@ implementation: [
 "Apply to cards, modals, and overlay elements",
 "Maintain sufficient contrast for accessibility"
 ],
-cssExample: `    .glass {
+cssExample: `      .glass {
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(16px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
       }
- `
+   `
 },
 
 neumorphism: {
@@ -102,13 +101,13 @@ implementation: [
 "Apply 2-4px shadow offset with 8-16px blur",
 "Reserve for interactive elements and cards"
 ],
-cssExample: `    .neumorphic {
+cssExample: `      .neumorphic {
         background: #e0e0e0;
         box-shadow:
           8px 8px 16px #bebebe,
           -8px -8px 16px #ffffff;
       }
- `
+   `
 }
 } as const;
 

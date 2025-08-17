@@ -1,8 +1,3 @@
----
-type: "agent_requested"
-description: "Example description"
----
-
 # Business-to-Product Development Framework
 
 ## Systematic Transformation of Ideas into Production-Ready Products
