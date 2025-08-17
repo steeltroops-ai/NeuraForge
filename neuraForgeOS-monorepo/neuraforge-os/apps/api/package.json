@@ -1,0 +1,23 @@
+{
+  "name": "@neuraforge/api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "build": "tsc",
+    "start": "bun src/index.ts",
+    "lint": "eslint src/**/*.ts",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.4.0",
+    "@fastify/websocket": "^8.3.0",
+    "fastify": "^4.24.0",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0"
+  }
+}

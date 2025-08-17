@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="quantumGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0066FF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00FFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF00FF;stop-opacity:1" />
+    </linearGradient>
+    <filter id="quantumGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Quantum cube structure -->
+  <g stroke="url(#quantumGradient)" stroke-width="1.5" fill="none" filter="url(#quantumGlow)">
+    <!-- Front face -->
+    <rect x="6" y="8" width="8" height="8" rx="1"/>
+    <!-- Back face -->
+    <rect x="10" y="4" width="8" height="8" rx="1"/>
+    <!-- Connecting lines -->
+    <line x1="6" y1="8" x2="10" y2="4"/>
+    <line x1="14" y1="8" x2="18" y2="4"/>
+    <line x1="14" y1="16" x2="18" y2="12"/>
+    <line x1="6" y1="16" x2="10" y2="12"/>
+  </g>
+  
+  <!-- Quantum particles -->
+  <g fill="url(#quantumGradient)" filter="url(#quantumGlow)">
+    <circle cx="8" cy="10" r="1.5" opacity="0.8"/>
+    <circle cx="12" cy="14" r="1.5" opacity="0.8"/>
+    <circle cx="16" cy="6" r="1.5" opacity="0.8"/>
+    <circle cx="14" cy="10" r="1" opacity="0.6"/>
+  </g>
+  
+  <!-- Quantum field lines -->
+  <g stroke="url(#quantumGradient)" stroke-width="0.8" fill="none" opacity="0.4">
+    <path d="M2 12 Q12 8 22 12"/>
+    <path d="M2 10 Q12 14 22 10"/>
+    <path d="M4 6 Q12 12 20 6"/>
+    <path d="M4 18 Q12 12 20 18"/>
+  </g>
+</svg>

@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  projects      Project[]
+  collaborations ProjectCollaborator[]
+}
+
+// Project model
+model Project {
+  id            String    @id @default(uuid())
+  title         String
+  description   String?
+  domain        String?
+  status        ProjectStatus @default(ACTIVE)
+  visibility    Visibility @default(PUBLIC)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  createdBy     User      @relation(fields: [createdById], references: [id])
+  createdById   String
+  collaborators ProjectCollaborator[]
+  branches      ResearchBranch[]
+}
+
+// Research Branch model
+model ResearchBranch {
+  id            String    @id @default(uuid())
+  branchName    String
+  hypothesis    String?
+  methodology   String?
+  status        BranchStatus @default(ACTIVE)
+  createdAt     DateTime  @default(now())
+  project       Project   @relation(fields: [projectId], references: [id])
+  projectId     String
+  parentBranch  ResearchBranch?  @relation("BranchTree", fields: [parentBranchId], references: [id])
+  parentBranchId String?
+  childBranches ResearchBranch[] @relation("BranchTree")
+}
+
+// Project Collaborator model
+model ProjectCollaborator {
+  id        String    @id @default(uuid())
+  role      Role      @default(VIEWER)
+  project   Project   @relation(fields: [projectId], references: [id])
+  projectId String
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([projectId, userId])
+}
+
+// Knowledge Node model
+model KnowledgeNode {
+  id        String    @id @default(uuid())
+  nodeType  NodeType
+  title     String
+  content   String?
+  metadata  Json?
+  embedding Vec(1536)? @postgres
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+enum ProjectStatus {
+  ACTIVE
+  ARCHIVED
+  COMPLETED
+}
+
+enum BranchStatus {
+  ACTIVE
+  MERGED
+  ABANDONED
+}
+
+enum Visibility {
+  PUBLIC
+  PRIVATE
+  RESTRICTED
+}
+
+enum Role {
+  OWNER
+  EDITOR
+  VIEWER
+}
+
+enum NodeType {
+  HYPOTHESIS
+  EXPERIMENT
+  OBSERVATION
+  CONCLUSION
+  REFERENCE
+}

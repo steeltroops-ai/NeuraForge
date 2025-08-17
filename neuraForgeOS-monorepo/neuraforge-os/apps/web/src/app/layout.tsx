@@ -1,0 +1,31 @@
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { Providers } from './providers'
+import { Toaster } from '@/components/ui/toaster'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'NeuraForge OS - AI-Native Research Ecosystem',
+  description: 'Transform research collaboration with AI-powered insights, version-controlled research trees, and real-time collaboration.',
+  keywords: ['research', 'AI', 'collaboration', 'science', 'innovation'],
+  authors: [{ name: 'NeuraForge Team' }],
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className="h-full">
+      <body className={`${inter.className} h-full bg-gray-50 antialiased`}>
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
+      </body>
+    </html>
+  )
+}
