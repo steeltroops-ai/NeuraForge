@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@/lib/auth/auth-context'
+import { useUser, useAuth as useClerkAuth } from '@clerk/nextjs'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
 interface AuthGuardProps {
@@ -11,30 +11,27 @@ interface AuthGuardProps {
   redirectTo?: string
 }
 
-export function AuthGuard({ 
-  children, 
-  requireAuth = true, 
-  redirectTo = '/auth/login' 
+export function AuthGuard({
+  children,
+  requireAuth = true,
+  redirectTo = '/sign-in'
 }: AuthGuardProps) {
-  const { isAuthenticated, isLoading, checkAuth } = useAuth()
+  const { isSignedIn, isLoaded } = useUser()
   const router = useRouter()
 
   useEffect(() => {
-    if (!isLoading) {
-      if (requireAuth && !isAuthenticated) {
+    if (isLoaded) {
+      if (requireAuth && !isSignedIn) {
         router.push(redirectTo)
-      } else if (!requireAuth && isAuthenticated) {
+      } else if (!requireAuth && isSignedIn) {
         // Redirect authenticated users away from auth pages
         router.push('/dashboard')
-      } else if (requireAuth && isAuthenticated) {
-        // Verify auth is still valid
-        checkAuth()
       }
     }
-  }, [isAuthenticated, isLoading, requireAuth, router, redirectTo, checkAuth])
+  }, [isSignedIn, isLoaded, requireAuth, router, redirectTo])
 
   // Show loading spinner while checking auth
-  if (isLoading) {
+  if (!isLoaded) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-primary-50/30 to-accent-50/20">
         <div className="text-center">
@@ -46,11 +43,11 @@ export function AuthGuard({
   }
 
   // Don't render children if auth requirements aren't met
-  if (requireAuth && !isAuthenticated) {
+  if (requireAuth && !isSignedIn) {
     return null
   }
 
-  if (!requireAuth && isAuthenticated) {
+  if (!requireAuth && isSignedIn) {
     return null
   }
 

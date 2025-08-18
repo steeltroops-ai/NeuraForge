@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useState, useCallback } from 'react'
 
 export interface Toast {
@@ -85,5 +86,3 @@ export function useToast() {
   }
 }
 
-// For React import
-import * as React from 'react'

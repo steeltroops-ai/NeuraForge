@@ -1,3 +1,5 @@
+@import '../styles/design-tokens.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -76,11 +78,14 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-neural-500/30 rounded-full;
+  background: var(--color-primary-500);
+  opacity: 0.3;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-neural-500/50;
+  background: var(--color-primary-500);
+  opacity: 0.5;
 }
 
 /* Firefox scrollbar */

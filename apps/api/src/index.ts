@@ -8,7 +8,7 @@ const fastify = Fastify({
 
 // Register CORS with more permissive settings for development
 fastify.register(cors, {
-  origin: ['http://localhost:3003', 'http://localhost:3002', 'http://localhost:3000'],
+  origin: ['http://localhost:3005', 'http://localhost:3003', 'http://localhost:3002', 'http://localhost:3000'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -157,7 +157,7 @@ const start = async () => {
     // Initialize Socket.io
     const io = new Server(fastify.server, {
       cors: {
-        origin: ['http://localhost:3003', 'http://localhost:3002', 'http://localhost:3000'],
+        origin: ['http://localhost:3005', 'http://localhost:3003', 'http://localhost:3002', 'http://localhost:3000'],
         credentials: true,
         methods: ['GET', 'POST']
       }

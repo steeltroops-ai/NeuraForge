@@ -1,23 +1,25 @@
-import { FuturisticHero } from '@/components/landing/futuristic-hero'
-import { FeaturesSection } from '@/components/landing/features-section'
-import { HowItWorksSection } from '@/components/landing/how-it-works-section'
-import { TestimonialsSection } from '@/components/landing/testimonials-section'
-import { CTASection } from '@/components/landing/cta-section'
-import { FuturisticHeader } from '@/components/layout/futuristic-header'
-import { Footer } from '@/components/layout/footer'
+import { MinimalistHeader } from '@/components/layout/minimalist-header'
+import { MinimalistHero } from '@/components/landing/minimalist-hero'
+import { OverviewSection } from '@/components/landing/overview-section'
+import { ResearchFeaturesSection } from '@/components/landing/research-features-section'
+import { CollaborationSection } from '@/components/landing/collaboration-section'
+import { InnovationAreasSection } from '@/components/landing/innovation-areas-section'
+import { CommunitySection } from '@/components/landing/community-section'
+import { MinimalistFooter } from '@/components/layout/minimalist-footer'
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-surface-background">
-      <FuturisticHeader />
+    <div className="min-h-screen bg-white">
+      <MinimalistHeader />
       <main id="main-content">
-        <FuturisticHero />
-        <FeaturesSection />
-        <HowItWorksSection />
-        <TestimonialsSection />
-        <CTASection />
+        <MinimalistHero />
+        <OverviewSection />
+        <ResearchFeaturesSection />
+        <CollaborationSection />
+        <InnovationAreasSection />
+        <CommunitySection />
       </main>
-      <Footer />
+      <MinimalistFooter />
     </div>
   )
 }

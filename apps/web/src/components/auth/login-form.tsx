@@ -5,10 +5,11 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useSignIn } from '@clerk/nextjs'
 import { Button } from '@/components/ui/modern-button'
 import { Input } from '@/components/ui/modern-input'
 import { EnhancedCard } from '@/components/ui/modern-card'
-import { useAuth } from '@/lib/auth/auth-context'
 import { useToast } from '@/hooks/use-toast'
 import { Mail, Lock, ArrowRight, Sparkles } from 'lucide-react'
 import { motion } from 'framer-motion'
@@ -22,8 +23,9 @@ type LoginFormData = z.infer<typeof loginSchema>
 
 export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false)
-  const { login } = useAuth()
+  const { signIn, setActive, isLoaded } = useSignIn()
   const { toast } = useToast()
+  const router = useRouter()
 
   const {
     register,
@@ -38,19 +40,36 @@ export function LoginForm() {
   })
 
   const onSubmit = async (data: LoginFormData) => {
+    if (!isLoaded) return
+
     setIsLoading(true)
     try {
-      await login(data.email, data.password)
-      toast({
-        title: 'Welcome back!',
-        description: 'You have been successfully logged in.',
-        variant: 'success',
+      const result = await signIn.create({
+        identifier: data.email,
+        password: data.password,
       })
-    } catch (error) {
+
+      if (result.status === 'complete') {
+        await setActive({ session: result.createdSessionId })
+        toast({
+          title: 'Welcome back!',
+          description: 'You have been successfully logged in.',
+          variant: 'success',
+        })
+        router.push('/dashboard')
+      } else {
+        console.error('Login incomplete:', result)
+        toast({
+          title: 'Login failed',
+          description: 'Please complete the sign-in process.',
+          variant: 'destructive',
+        })
+      }
+    } catch (error: any) {
       console.error('Login error:', error)
       toast({
         title: 'Login failed',
-        description: error instanceof Error ? error.message : 'Invalid credentials. Please try again.',
+        description: error?.errors?.[0]?.message || 'Invalid credentials. Please try again.',
         variant: 'destructive',
       })
     } finally {

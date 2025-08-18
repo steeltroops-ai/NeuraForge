@@ -5,10 +5,11 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useSignUp } from '@clerk/nextjs'
 import { Button } from '@/components/ui/modern-button'
 import { Input } from '@/components/ui/modern-input'
 import { EnhancedCard } from '@/components/ui/modern-card'
-import { useAuth } from '@/lib/auth/auth-context'
 import { useToast } from '@/hooks/use-toast'
 import { Mail, Lock, User, ArrowRight, Sparkles } from 'lucide-react'
 import { motion } from 'framer-motion'
@@ -27,8 +28,9 @@ type RegisterFormData = z.infer<typeof registerSchema>
 
 export function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false)
-  const { register: registerUser } = useAuth()
+  const { signUp, setActive, isLoaded } = useSignUp()
   const { toast } = useToast()
+  const router = useRouter()
 
   const {
     register,
@@ -39,19 +41,38 @@ export function RegisterForm() {
   })
 
   const onSubmit = async (data: RegisterFormData) => {
+    if (!isLoaded) return
+
     setIsLoading(true)
     try {
-      await registerUser(data.email, data.password, data.name)
-      toast({
-        title: 'Account created!',
-        description: 'Welcome to NeuraForge OS. Your research journey begins now.',
-        variant: 'success',
+      const result = await signUp.create({
+        emailAddress: data.email,
+        password: data.password,
+        firstName: data.name,
       })
-    } catch (error) {
+
+      if (result.status === 'complete') {
+        await setActive({ session: result.createdSessionId })
+        toast({
+          title: 'Account created!',
+          description: 'Welcome to NeuraForge OS. Your research journey begins now.',
+          variant: 'success',
+        })
+        router.push('/dashboard')
+      } else {
+        // Handle email verification if needed
+        console.log('Sign up incomplete:', result)
+        toast({
+          title: 'Account created!',
+          description: 'Please check your email to verify your account.',
+          variant: 'success',
+        })
+      }
+    } catch (error: any) {
       console.error('Registration error:', error)
       toast({
         title: 'Registration failed',
-        description: error instanceof Error ? error.message : 'Failed to create account. Please try again.',
+        description: error?.errors?.[0]?.message || 'Failed to create account. Please try again.',
         variant: 'destructive',
       })
     } finally {

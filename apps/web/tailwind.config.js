@@ -18,21 +18,39 @@ module.exports = {
       },
     },
     extend: {
-      // Futuristic Color Palette
+      // Design System Colors
       colors: {
-        // Neural Network Inspired Colors
-        neural: {
-          50: "#F0F4FF",
-          100: "#E0E7FF",
-          200: "#C7D2FE",
-          300: "#A5B4FC",
-          400: "#818CF8",
-          500: "#6366F1", // Primary neural
-          600: "#4F46E5",
-          700: "#4338CA",
-          800: "#3730A3",
-          900: "#312E81",
-          950: "#1E1B4B",
+        // Primary Colors - Neon Purple Accent
+        primary: {
+          50: 'var(--color-primary-50)',
+          100: 'var(--color-primary-100)',
+          200: 'var(--color-primary-200)',
+          300: 'var(--color-primary-300)',
+          400: 'var(--color-primary-400)',
+          500: 'var(--color-primary-500)', // Main brand color
+          600: 'var(--color-primary-600)',
+          700: 'var(--color-primary-700)',
+          800: 'var(--color-primary-800)',
+          900: 'var(--color-primary-900)',
+          950: 'var(--color-primary-950)',
+          DEFAULT: 'var(--color-primary-500)',
+          foreground: 'var(--color-text-inverse)',
+        },
+
+        // Neutral Colors - Monochromatic Palette
+        neutral: {
+          0: 'var(--color-neutral-0)',
+          50: 'var(--color-neutral-50)',
+          100: 'var(--color-neutral-100)',
+          200: 'var(--color-neutral-200)',
+          300: 'var(--color-neutral-300)',
+          400: 'var(--color-neutral-400)',
+          500: 'var(--color-neutral-500)',
+          600: 'var(--color-neutral-600)',
+          700: 'var(--color-neutral-700)',
+          800: 'var(--color-neutral-800)',
+          900: 'var(--color-neutral-900)',
+          950: 'var(--color-neutral-950)',
         },
         
         // Quantum Computing Inspired
