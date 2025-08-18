@@ -1,25 +1,42 @@
 {
-  "name": "neuraforge-os-workspace",
+  "name": "neuraforge-os",
   "version": "0.1.0",
   "private": true,
+  "description": "AI-native research ecosystem platform",
   "workspaces": [
-    "neuraForgeOS-monorepo/neuraforge-os/apps/*",
-    "neuraForgeOS-monorepo/neuraforge-os/packages/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
-    "build": "cd neuraForgeOS-monorepo/neuraforge-os && bun run build",
-    "dev": "cd neuraForgeOS-monorepo/neuraforge-os && bun run dev",
-    "lint": "cd neuraForgeOS-monorepo/neuraforge-os && bun run lint",
-    "test": "cd neuraForgeOS-monorepo/neuraforge-os && bun run test",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "install-deps": "cd neuraForgeOS-monorepo/neuraforge-os && bun install"
+    "dev": "turbo run dev",
+    "dev:web": "turbo run dev --filter=@neuraforge/web",
+    "dev:api": "turbo run dev --filter=@neuraforge/api",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "type-check": "turbo run type-check",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
-    "eslint": "^8.38.0",
-    "prettier": "^2.8.7",
-    "turbo": "^1.9.3",
-    "typescript": "^5.0.4"
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.50.0",
+    "prettier": "^3.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.0",
+    "turbo": "^1.10.0",
+    "typescript": "^5.2.0",
+    "@types/node": "^20.0.0"
+  },
+  "packageManager": "bun@1.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   }
 }

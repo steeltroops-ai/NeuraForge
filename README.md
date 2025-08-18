@@ -2,65 +2,83 @@
 
 NeuraForge OS is the world's first AI-native research ecosystem that transforms isolated research efforts into a connected, collaborative platform.
 
-## Project Structure
-
-The main project is located in `neuraForgeOS-monorepo/neuraforge-os/` which contains:
-
-- `apps/web/` - Next.js frontend application
-- `apps/api/` - Fastify backend API with Socket.io
-- `packages/` - Shared packages (core, ui, database, etc.)
-
-## Quick Start
+## 🚀 Quick Start
 
 ```bash
 # Install dependencies
-npm run install-deps
+bun install
 
 # Start development servers
-npm run dev
+bun run dev
 
 # Build for production
-npm run build
+bun run build
 ```
 
-## Development
+## 📁 Project Structure
 
-The project uses:
+```
+neuraforge-os/
+├── apps/
+│   ├── web/          # Next.js frontend application
+│   └── api/          # Fastify backend API with Socket.io
+├── packages/
+│   ├── ui/           # Design system and UI components
+│   ├── core/         # Core business logic
+│   ├── database/     # Database layer with Prisma
+│   ├── shared/       # Shared utilities and types
+│   ├── ai/           # AI/ML functionality
+│   └── config/       # Shared configurations
+├── docs/             # Documentation
+├── tools/            # Build tools and scripts
+└── .github/          # GitHub workflows
+```
+
+## 🛠️ Technology Stack
+
 - **Frontend**: Next.js 14 with React 18+ and TypeScript
 - **Backend**: Fastify with Socket.io for real-time features
 - **Package Manager**: Bun
 - **Build System**: Turborepo
-- **Styling**: Tailwind CSS
-
-## Architecture
-
-- **Monorepo**: Turborepo for efficient build orchestration
-- **Real-time**: Socket.io for collaborative features
-- **Authentication**: JWT-based auth system
+- **Styling**: Tailwind CSS with custom design system
 - **Database**: PostgreSQL with Prisma ORM (planned)
+- **Authentication**: JWT-based auth system
 
-## Getting Started
+## 🏃‍♂️ Development
 
-1. Navigate to the main project directory:
-   ```bash
-   cd neuraForgeOS-monorepo/neuraforge-os
-   ```
-
-2. Install dependencies:
+1. **Install dependencies**
    ```bash
    bun install
    ```
 
-3. Start development servers:
+2. **Start development servers**
    ```bash
    bun run dev
    ```
 
-4. Access the application:
-   - Frontend: http://localhost:3003
+3. **Access the applications**
+   - Frontend: http://localhost:3005
    - API: http://localhost:4000
 
-## Demo Credentials
+## 📚 Documentation
+
+- [Architecture Overview](./docs/ARCHITECTURE.md)
+- [Development Guide](./docs/DEVELOPMENT.md)
+- [Authentication System](./docs/AUTHENTICATION_SYSTEM.md)
+- [Complete Documentation](./docs/README.md)
+
+## 🔧 Available Scripts
+
+- `bun run dev` - Start all development servers
+- `bun run dev:web` - Start only the web app
+- `bun run dev:api` - Start only the API server
+- `bun run build` - Build all applications
+- `bun run lint` - Run linting
+- `bun run type-check` - Run TypeScript type checking
+- `bun run test` - Run tests
+- `bun run clean` - Clean build artifacts
+
+## 🧪 Demo Credentials
 
 - Email: demo@neuraforge.dev
 - Password: demo123
