@@ -12,9 +12,9 @@ const isProtectedRoute = createRouteMatcher([
   '/analytics(.*)',
 ]);
 
-export default clerkMiddleware((auth, req) => {
+export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {
-    const { userId } = auth();
+    const { userId } = await auth();
     if (!userId) {
       return NextResponse.redirect(new URL('/sign-in', req.url));
     }
