@@ -10,7 +10,7 @@ interface AuthLayoutProps {
   subtitle: string
 }
 
-export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
+export function AuthLayout({ children, title: _title, subtitle: _subtitle }: AuthLayoutProps) {
   const floatingVariants = {
     animate: {
       y: [-10, 10, -10],

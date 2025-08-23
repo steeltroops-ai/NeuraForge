@@ -3,15 +3,32 @@ import cors from '@fastify/cors'
 import { Server } from 'socket.io'
 
 const fastify = Fastify({
-  logger: true
+  logger: process.env.NODE_ENV === 'production'
 })
 
-// Register CORS with more permissive settings for development
+// Get allowed origins from environment or use defaults
+const getAllowedOrigins = () => {
+  if (process.env.CORS_ORIGINS) {
+    return process.env.CORS_ORIGINS.split(',').map(origin => origin.trim())
+  }
+
+  // Default origins for development
+  return [
+    'http://localhost:3005',
+    'http://localhost:3003',
+    'http://localhost:3002',
+    'http://localhost:3000',
+    'https://neuraforge.vercel.app',
+    'https://neuraforge-os.vercel.app'
+  ]
+}
+
+// Register CORS with environment-based configuration
 fastify.register(cors, {
-  origin: ['http://localhost:3005', 'http://localhost:3003', 'http://localhost:3002', 'http://localhost:3000'],
+  origin: getAllowedOrigins(),
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 })
 
 // Mock user database
@@ -35,9 +52,16 @@ function generateToken(userId: string) {
   return `mock_token_${userId}_${Date.now()}`
 }
 
+// Types for request bodies
+interface RegisterBody {
+  email: string
+  password: string
+  name: string
+}
+
 // Auth routes
 fastify.post('/auth/register', async (request, reply) => {
-  const { email, password, name } = request.body as any
+  const { email, password, name } = request.body as RegisterBody
 
   if (!email || !password || !name) {
     return reply.code(400).send({ message: 'Missing required fields' })
@@ -69,8 +93,13 @@ fastify.post('/auth/register', async (request, reply) => {
   })
 })
 
+interface LoginBody {
+  email: string
+  password: string
+}
+
 fastify.post('/auth/login', async (request, reply) => {
-  const { email, password } = request.body as any
+  const { email, password } = request.body as LoginBody
 
   if (!email || !password) {
     return reply.code(400).send({ message: 'Missing email or password' })
@@ -117,8 +146,12 @@ fastify.get('/auth/profile', async (request, reply) => {
   return reply.send(user)
 })
 
+interface RefreshBody {
+  refreshToken: string
+}
+
 fastify.post('/auth/refresh', async (request, reply) => {
-  const { refreshToken } = request.body as any
+  const { refreshToken } = request.body as RefreshBody
   
   if (!refreshToken) {
     return reply.code(400).send({ message: 'Refresh token required' })
@@ -144,15 +177,20 @@ fastify.post('/auth/logout', async (request, reply) => {
 })
 
 // Health check
-fastify.get('/health', async (request, reply) => {
+fastify.get('/health', async () => {
   return { status: 'ok', timestamp: new Date().toISOString() }
 })
 
 // Start server
 const start = async () => {
   try {
-    const server = await fastify.listen({ port: 4000, host: '0.0.0.0' })
-    console.log('🚀 API Server running on http://localhost:4000')
+    const port = process.env.PORT || 4000
+    const host = process.env.HOST || '0.0.0.0'
+
+    await fastify.listen({ port: Number(port), host })
+    console.log(`🚀 API Server running on ${host}:${port}`)
+    console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`)
+    console.log(`🌐 CORS Origins: ${getAllowedOrigins().join(', ')}`)
     
     // Initialize Socket.io
     const io = new Server(fastify.server, {

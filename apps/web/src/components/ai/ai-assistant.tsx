@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Cpu, Send, Lightbulb, BookOpen, Zap } from 'lucide-react'
 
@@ -10,7 +10,7 @@ interface AIAssistantProps {
   projectId: string
 }
 
-export function AIAssistant({ projectId }: AIAssistantProps) {
+export function AIAssistant({ projectId: _projectId }: AIAssistantProps) {
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -107,7 +107,7 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
               <div className="space-y-4">
                 <div className="bg-gray-50 rounded-lg p-3">
                   <p className="text-sm text-gray-700">
-                    Hello! I'm your AI research assistant. I can help you with hypothesis generation, 
+                    Hello! I&apos;m your AI research assistant. I can help you with hypothesis generation,
                     literature discovery, and research insights. What would you like to explore?
                   </p>
                 </div>

@@ -38,12 +38,12 @@ export function CollaborationSection() {
           </h3>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Join a global community of researchers, scientists, and AI systems working together 
-            to solve humanity's most pressing challenges through collaborative innovation.
+            to solve humanity&apos;s most pressing challenges through collaborative innovation.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {collaborationFeatures.map((feature, index) => (
+          {collaborationFeatures.map((feature) => (
             <div key={feature.title} className="text-center group">
               <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-6 group-hover:shadow-md transition-shadow duration-200">
                 <feature.icon className="w-8 h-8 text-purple-600" />

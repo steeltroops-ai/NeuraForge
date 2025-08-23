@@ -1,5 +1,6 @@
 import { MinimalistHeader } from '@/components/layout/minimalist-header'
 import { MinimalistHero } from '@/components/landing/minimalist-hero'
+import { InteractiveDemo } from '@/components/landing/interactive-demo'
 import { OverviewSection } from '@/components/landing/overview-section'
 import { ResearchFeaturesSection } from '@/components/landing/research-features-section'
 import { CollaborationSection } from '@/components/landing/collaboration-section'
@@ -15,9 +16,9 @@ export default function HomePage() {
         <MinimalistHero />
         <OverviewSection />
         <ResearchFeaturesSection />
-        <CollaborationSection />
+        <InteractiveDemo />       
         <InnovationAreasSection />
-        <CommunitySection />
+        <CollaborationSection />        <CommunitySection />
       </main>
       <MinimalistFooter />
     </div>

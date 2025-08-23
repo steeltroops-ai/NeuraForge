@@ -80,10 +80,12 @@ const buttonVariants = cva(
         ]
       },
       size: {
-        sm: 'h-9 px-3 text-sm',
-        md: 'h-10 px-4 text-sm',
+        sm: 'h-7 px-3 text-sm',
+        md: 'h-7 px-4 text-sm',
         lg: 'h-12 px-6 text-base',
-        xl: 'h-14 px-8 text-lg',
+        xl: 'h-10 px-5 text-lg', // Further reduced by 10% from h-12 px-6
+        'xl-reduced': 'h-12 px-6 text-lg', // Previous reduced size preserved
+        'xl-original': 'h-14 px-8 text-lg', // Original XL size preserved
         icon: 'h-10 w-10'
       },
       fullWidth: {
@@ -126,7 +128,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <>
         {loading && (
           <svg
-            className="animate-spin h-4 w-4"
+            className="w-4 h-4 animate-spin"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

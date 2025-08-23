@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { ClerkProvider } from '@clerk/nextjs'
 import { SocketProvider } from '@/lib/socket/socket-context'
 import { ThemeProvider } from '@/components/theme-provider'
-// import { AuthProvider } from '@/lib/auth/auth-context' // Commented out - replaced by Clerk
+import { AuthProvider } from '@/contexts/auth-context'
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(
@@ -29,19 +29,21 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <ClerkProvider>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SocketProvider>
-            {children}
-          </SocketProvider>
-        </ThemeProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SocketProvider>
+              {children}
+            </SocketProvider>
+          </ThemeProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </AuthProvider>
     </ClerkProvider>
   )
 }

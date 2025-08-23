@@ -64,7 +64,7 @@ export function InnovationAreasSection() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {innovationAreas.map((area, index) => (
+          {innovationAreas.map((area) => (
             <div 
               key={area.title} 
               className="group p-6 bg-gray-50 rounded-2xl hover:bg-purple-50 transition-all duration-200 cursor-pointer border border-transparent hover:border-purple-100"

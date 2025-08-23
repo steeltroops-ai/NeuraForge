@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useUser, useAuth as useClerkAuth } from '@clerk/nextjs'
+import { useUser } from '@clerk/nextjs'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
 interface AuthGuardProps {

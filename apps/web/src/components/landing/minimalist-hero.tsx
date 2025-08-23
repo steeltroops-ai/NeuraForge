@@ -1,17 +1,24 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { SignedOut, SignInButton } from '@clerk/nextjs'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/design-system-button'
+import { AnimatedSphereErrorBoundary } from '@/components/ui/error-boundary'
+import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
 
-// Animated sphere component
+// Animated sphere component - now renders immediately
 const AnimatedSphere = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas) return
+    if (!canvas || !mounted) return
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
@@ -69,7 +76,7 @@ const AnimatedSphere = () => {
       time += 0.01
 
       // Update node positions with rotation
-      nodes.forEach((node, i) => {
+      nodes.forEach((node) => {
         const rotationY = time * 0.5
         const rotationX = time * 0.3
         
@@ -135,8 +142,9 @@ const AnimatedSphere = () => {
       window.removeEventListener('resize', resizeCanvas)
       cancelAnimationFrame(animationFrame)
     }
-  }, [])
+  }, [mounted])
 
+  // Always render the canvas - no loading states or backgrounds
   return (
     <canvas
       ref={canvasRef}
@@ -147,13 +155,20 @@ const AnimatedSphere = () => {
 }
 
 export function MinimalistHero() {
+  const router = useRouter()
+
+  const handleStartResearch = () => {
+    // User is authenticated, go directly to research dashboard
+    router.push('/dashboard')
+  }
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-white pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section className="relative flex items-center justify-center min-h-screen pt-16 bg-white">
+      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8 sm:py-16 lg:py-20">
+        <div className="grid items-center grid-cols-1 gap-8 lg:gap-16 lg:grid-cols-2">
           {/* Left Content */}
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight mb-8">
+            <h1 className="mb-8 text-5xl font-bold leading-tight text-gray-900 md:text-6xl lg:text-7xl">
               Solving Humanity's
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-800">
@@ -161,40 +176,48 @@ export function MinimalistHero() {
               </span>
             </h1>
             
-            <p className="text-xl text-gray-600 leading-relaxed mb-12 max-w-2xl">
+            <p className="max-w-2xl mb-12 text-xl leading-relaxed text-gray-600">
               NeuraForge is a decentralized research network that incentivizes humans and AI to solve 
               complex research challenges through collaborative innovation.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
               <SignedOut>
-                <SignInButton mode="modal">
+                <SignInButton
+                  mode="modal"
+                  forceRedirectUrl="/dashboard/"
+                  signUpForceRedirectUrl="/dashboard/"
+                >
                   <Button
                     variant="primary"
                     size="xl"
-                    rightIcon={<ArrowRight className="h-5 w-5" />}
+                    rightIcon={<ArrowRight className="w-5 h-5" />}
                   >
                     Start Research
                   </Button>
                 </SignInButton>
               </SignedOut>
 
-              <Button
-                variant="secondary"
-                size="xl"
-                asChild
-              >
-                <a href="https://discord.gg/neuraforge" target="_blank" rel="noopener noreferrer">
-                  Join Community
-                </a>
-              </Button>
+              <SignedIn>
+                <Button
+                  variant="primary"
+                  size="xl"
+                  rightIcon={<ArrowRight className="w-5 h-5" />}
+                  onClick={handleStartResearch}
+                >
+                  Continue Research
+                </Button>
+              </SignedIn>
+              
             </div>
           </div>
 
           {/* Right Content - Animated Sphere */}
           <div className="flex justify-center lg:justify-end">
-            <div className="w-96 h-96 relative">
-              <AnimatedSphere />
+            <div className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[480px] lg:h-[480px] xl:w-[576px] xl:h-[576px] max-w-full">
+              <AnimatedSphereErrorBoundary>
+                <AnimatedSphere />
+              </AnimatedSphereErrorBoundary>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/design-system-button'
 
-export function MinimalistHeader() {
+export function DashboardHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navigation = [
@@ -17,24 +17,19 @@ export function MinimalistHeader() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-gray-100 bg-white/80 backdrop-blur-md">
-      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-gray-900 to-gray-600">
-              <div className="w-4 h-4 bg-white rounded-sm" />
-            </div>
-            <span className="text-xl font-bold text-gray-900">NeuraForge</span>
-          </Link>
+          {/* Empty space where logo would be - keeps layout balanced */}
+          <div className="w-8 h-8"></div>
 
           {/* Desktop Navigation */}
-          <nav className="items-center hidden space-x-8 md:flex">
+          <nav className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900"
+                className="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium"
               >
                 {item.name}
               </Link>
@@ -42,14 +37,19 @@ export function MinimalistHeader() {
           </nav>
 
           {/* Auth Buttons */}
-          <div className="items-center hidden space-x-4 md:flex">
+          <div className="hidden md:flex items-center space-x-4">
             <SignedOut>
-              <SignInButton mode="modal">                
+              <SignInButton mode="modal">
+                <Button variant="ghost" size="sm">
+                  Sign In
+                </Button>
+              </SignInButton>
+              <SignInButton mode="modal">
                 <Button
                   variant="primary"
                   size="sm"
                 >
-                  Sign In
+                  Start Research
                 </Button>
               </SignInButton>
             </SignedOut>
@@ -66,7 +66,7 @@ export function MinimalistHeader() {
 
           {/* Mobile menu button */}
           <button
-            className="p-2 text-gray-600 rounded-md md:hidden hover:text-gray-900 hover:bg-gray-100"
+            className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -75,30 +75,26 @@ export function MinimalistHeader() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="py-4 border-t border-gray-100 md:hidden">
+          <div className="md:hidden py-4 border-t border-gray-100">
             <div className="flex flex-col space-y-4">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900"
+                  className="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="flex flex-col pt-4 space-y-2 border-t border-gray-100">
+              <div className="pt-4 border-t border-gray-100 flex flex-col space-y-2">
                 <SignedOut>
                   <SignInButton mode="modal">
                     <Button variant="ghost" size="sm" fullWidth>
                       Sign In
                     </Button>
                   </SignInButton>
-                  <SignInButton
-                    mode="modal"
-                    forceRedirectUrl="/dashboard/research"
-                    signUpForceRedirectUrl="/dashboard/research"
-                  >
+                  <SignInButton mode="modal">
                     <Button
                       variant="primary"
                       size="sm"

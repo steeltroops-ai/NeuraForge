@@ -2,8 +2,9 @@
 import type { AIProvider, ValidationResult, LiteratureResult } from './types'
 
 export class MockAIProvider implements AIProvider {
-  async generateSuggestions(context: string): Promise<string[]> {
-    // Mock implementation
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async generateSuggestions(_context: string): Promise<string[]> {
+    // Mock implementation - context parameter will be used in real implementation
     return [
       'Consider exploring related research in quantum computing',
       'Investigate potential applications in machine learning',
@@ -11,8 +12,9 @@ export class MockAIProvider implements AIProvider {
     ]
   }
 
-  async validateHypothesis(hypothesis: string): Promise<ValidationResult> {
-    // Mock implementation
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async validateHypothesis(_hypothesis: string): Promise<ValidationResult> {
+    // Mock implementation - hypothesis parameter will be used in real implementation
     return {
       isValid: true,
       confidence: 0.85,
@@ -24,7 +26,8 @@ export class MockAIProvider implements AIProvider {
     }
   }
 
-  async discoverLiterature(query: string): Promise<LiteratureResult[]> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async discoverLiterature(_query: string): Promise<LiteratureResult[]> {
     // Mock implementation
     return [
       {
