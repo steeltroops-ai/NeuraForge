@@ -18,7 +18,8 @@ export default function HomePage() {
         <ResearchFeaturesSection />
         <InteractiveDemo />       
         <InnovationAreasSection />
-        <CollaborationSection />        <CommunitySection />
+        <CollaborationSection />        
+        <CommunitySection />
       </main>
       <MinimalistFooter />
     </div>
