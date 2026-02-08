@@ -4,13 +4,11 @@
 
 NeuraForge is the world's first AI-agent-native research platform that transforms how humanity conducts scientific discovery. By orchestrating specialized AI research agents alongside human researchers, we're building the infrastructure for accelerated knowledge creation and breakthrough discoveries.
 
-## 🎯 Mission
+## Mission
 
-**Solving Humanity's Hardest Problems through AI-Powered Research Collaboration**
+Solving humanity's hardest problems through AI-powered research collaboration. NeuraForge provides the operating system where AI agents and human researchers work together to tackle complex challenges in medicine, climate, AI safety, and beyond.
 
-We believe the next wave of scientific breakthroughs will come from seamless human-AI collaboration in research. NeuraForge provides the operating system for this future, where AI agents and human researchers work together to tackle complex challenges in medicine, climate, AI safety, and beyond.
-
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Install dependencies
@@ -23,7 +21,7 @@ bun run dev
 bun run build
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 neuraforge-os/
@@ -42,7 +40,7 @@ neuraforge-os/
 └── .github/          # GitHub workflows
 ```
 
-## 🧠 Core Capabilities
+## Core Capabilities
 
 ### Multi-Agent Research Orchestration
 - **Domain-Specialized AI Agents**: Math, coding, physics, biology, policy agents working in parallel
@@ -62,7 +60,7 @@ neuraforge-os/
 - **Peer Review Simulation**: AI agents role-play reviewers to stress-test arguments
 - **Debate Arena**: Multiple agents pressure-test hypotheses through structured debate
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Frontend**: Next.js 14 with React 18+ and TypeScript
 - **Backend**: Fastify with Socket.io for real-time collaboration
@@ -74,7 +72,7 @@ neuraforge-os/
 - **Authentication**: Clerk for secure researcher authentication
 - **Real-time**: Socket.io for collaborative research sessions
 
-## 🏃‍♂️ Development
+## Development
 
 1. **Install dependencies**
    ```bash
@@ -90,14 +88,14 @@ neuraforge-os/
    - Frontend: http://localhost:3005
    - API: http://localhost:4000
 
-## 📚 Documentation
+## Documentation
 
 - [Architecture Overview](./docs/ARCHITECTURE.md)
 - [Development Guide](./docs/DEVELOPMENT.md)
 - [Authentication System](./docs/AUTHENTICATION_SYSTEM.md)
 - [Complete Documentation](./docs/README.md)
 
-## 🔧 Available Scripts
+## Available Scripts
 
 - `bun run dev` - Start all development servers
 - `bun run dev:web` - Start only the web app
@@ -108,7 +106,7 @@ neuraforge-os/
 - `bun run test` - Run tests
 - `bun run clean` - Clean build artifacts
 
-## 🧪 Demo Credentials
+## Demo Credentials
 
 - Email: demo@neuraforge.dev
 - Password: demo123
