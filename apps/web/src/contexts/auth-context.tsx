@@ -17,8 +17,8 @@ const convertClerkUser = (clerkUser: {
   fullName?: string | null;
   firstName?: string | null;
   imageUrl?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
 }): User => {
   return {
     id: clerkUser.id,
