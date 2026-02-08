@@ -163,25 +163,49 @@ export function MinimalistHero() {
   }
 
   return (
-    <section className="relative flex items-center justify-center min-h-screen pt-16 bg-white">
-      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8 sm:py-16 lg:py-20">
-        <div className="grid items-center grid-cols-1 gap-8 lg:gap-16 lg:grid-cols-2">
+    <section
+      className="relative flex items-center justify-center min-h-screen bg-[var(--color-background)]"
+      style={{ paddingTop: 'var(--header-height)' }}
+    >
+      <div
+        className="mx-auto max-w-7xl"
+        style={{
+          paddingLeft: 'var(--space-4)',
+          paddingRight: 'var(--space-4)',
+          paddingTop: 'var(--space-12)',
+          paddingBottom: 'var(--space-12)'
+        }}
+      >
+        <div
+          className="grid items-center grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16"
+        >
           {/* Left Content */}
           <div className="text-center lg:text-left">
-            <h1 className="mb-8 text-5xl font-bold leading-tight text-gray-900 md:text-6xl lg:text-7xl">
+            <h1
+              className="font-bold leading-tight text-[var(--color-text-primary)] text-5xl md:text-6xl lg:text-7xl mb-8"
+            >
               Solving Humanity's
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-800">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary-600)] to-[var(--color-primary-800)]">
                 Hardest Problems
               </span>
             </h1>
-            
-            <p className="max-w-2xl mb-12 text-xl leading-relaxed text-gray-600">
-              NeuraForge is a decentralized research network that incentivizes humans and AI to solve 
+
+            <p
+              className="max-w-2xl leading-relaxed text-[var(--color-text-secondary)]"
+              style={{
+                marginBottom: 'var(--space-12)',
+                fontSize: 'var(--font-size-xl)'
+              }}
+            >
+              NeuraForge is a decentralized research network that incentivizes humans and AI to solve
               complex research challenges through collaborative innovation.
             </p>
 
-            <div className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
+            <div
+              className="flex flex-col justify-center sm:flex-row lg:justify-start"
+              style={{ gap: 'var(--space-4)' }}
+            >
               <SignedOut>
                 <SignInButton
                   mode="modal"
@@ -208,13 +232,15 @@ export function MinimalistHero() {
                   Continue Research
                 </Button>
               </SignedIn>
-              
+
             </div>
           </div>
 
           {/* Right Content - Animated Sphere */}
           <div className="flex justify-center lg:justify-end">
-            <div className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[480px] lg:h-[480px] xl:w-[576px] xl:h-[576px] max-w-full">
+            <div
+              className="relative max-w-full w-80 h-80 sm:w-96 sm:h-96 lg:w-[480px] lg:h-[480px] xl:w-[576px] xl:h-[576px]"
+            >
               <AnimatedSphereErrorBoundary>
                 <AnimatedSphere />
               </AnimatedSphereErrorBoundary>

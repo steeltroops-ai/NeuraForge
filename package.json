@@ -40,6 +40,8 @@
     "bun": ">=1.0.0"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.31.6",
+    "@clerk/shared": "2.11.4",
     "zustand": "^5.0.8"
   }
 }

@@ -5,7 +5,7 @@ export interface Toast {
   id: string
   title: string
   description?: string
-  variant?: 'default' | 'destructive' | 'success'
+  variant?: 'default' | 'destructive' | 'success' | 'warning' | 'info'
   duration?: number
 }
 

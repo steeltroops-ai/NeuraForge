@@ -1,23 +1,55 @@
 'use client'
 
+
+
 export function OverviewSection() {
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-sm font-semibold text-purple-600 uppercase tracking-wide mb-4">
+    <section
+      className="bg-[var(--color-surface)]"
+      style={{
+        paddingTop: 'var(--space-24)',
+        paddingBottom: 'var(--space-24)'
+      }}
+    >
+      <div
+        className="max-w-7xl mx-auto"
+        style={{
+          paddingLeft: 'var(--space-4)',
+          paddingRight: 'var(--space-4)'
+        }}
+      >
+        <div
+          className="text-center"
+          style={{ marginBottom: 'var(--space-16)' }}
+        >
+          <h2
+            className="font-semibold text-[var(--color-primary-600)] uppercase"
+            style={{
+              fontSize: 'var(--font-size-sm)',
+              letterSpacing: 'var(--letter-spacing-wide)',
+              marginBottom: 'var(--space-4)'
+            }}
+          >
             Overview
           </h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+          <h3
+            className="font-bold text-[var(--color-text-primary)] text-4xl md:text-5xl"
+            style={{
+              marginBottom: 'var(--space-8)'
+            }}
+          >
             Accelerating Scientific Discovery
           </h3>
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <p className="text-xl text-gray-600 leading-relaxed text-center">
-            NeuraForge is a decentralized platform that unites human ingenuity and artificial 
-            intelligence to accelerate breakthroughs in science, technology, and innovation. 
-            By leveraging a collaborative ecosystem, it empowers participants to contribute, 
+          <p
+            className="leading-relaxed text-center text-[var(--color-text-secondary)]"
+            style={{ fontSize: 'var(--font-size-xl)' }}
+          >
+            NeuraForge is a decentralized platform that unites human ingenuity and artificial
+            intelligence to accelerate breakthroughs in science, technology, and innovation.
+            By leveraging a collaborative ecosystem, it empowers participants to contribute,
             validate, and benefit from the advancement of knowledge and discovery.
           </p>
         </div>

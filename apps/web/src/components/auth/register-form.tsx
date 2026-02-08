@@ -7,7 +7,7 @@ import { z } from 'zod'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useSignUp } from '@clerk/nextjs'
-import { Button } from '@/components/ui/modern-button'
+import { Button } from '@/components/ui/design-system-button'
 import { Input } from '@/components/ui/modern-input'
 import { EnhancedCard } from '@/components/ui/modern-card'
 import { useToast } from '@/hooks/use-toast'
@@ -199,7 +199,7 @@ export function RegisterForm() {
             <Button
               type="submit"
               loading={isLoading}
-              variant="gradient"
+              variant="primary"
               size="lg"
               className="w-full group"
               rightIcon={<ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />}

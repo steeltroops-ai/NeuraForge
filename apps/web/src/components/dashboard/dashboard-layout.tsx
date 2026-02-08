@@ -3,31 +3,32 @@
 import { useState, useEffect } from 'react'
 import { TopNavigation } from './top-navigation'
 import { LeftSidebar } from './left-sidebar'
-import { RightSidebar } from './right-sidebar'
-import { RightSidebarButtons } from './right-sidebar-buttons'
+import { UnifiedRightSidebar } from './unified-right-sidebar'
+import { DashboardSPARouter } from './dashboard-spa-router'
 import { DashboardRouteGuard } from '@/components/auth/protected-route'
 
+
 interface DashboardLayoutProps {
-  children: React.ReactNode
+  children?: React.ReactNode // Make optional for SPA mode
 }
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [leftSidebarCollapsed, setLeftSidebarCollapsed] = useState(false)
-  const [rightSidebarCollapsed, setRightSidebarCollapsed] = useState(true) // Start collapsed
-  const [activeRightSection, setActiveRightSection] = useState<string | null>(null)
+  const [rightSidebarExpanded, setRightSidebarExpanded] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
   // Handle responsive behavior
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth < 768
+      // Use design token breakpoint
+      const breakpointMd = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--breakpoint-md').replace('px', '')) || 768
+      const mobile = window.innerWidth < breakpointMd
       setIsMobile(mobile)
-      
+
       // Auto-collapse sidebars on mobile
       if (mobile) {
         setLeftSidebarCollapsed(true)
-        setRightSidebarCollapsed(true)
-        setActiveRightSection(null)
+        setRightSidebarExpanded(false)
       }
     }
 
@@ -36,98 +37,97 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Handle right sidebar section changes
-  const handleRightSectionChange = (section: string | null) => {
-    setActiveRightSection(section)
-    setRightSidebarCollapsed(section === null)
+  // Handle right sidebar layout changes
+  const handleRightSidebarLayoutChange = (isExpanded: boolean) => {
+    setRightSidebarExpanded(isExpanded)
   }
 
   return (
     <DashboardRouteGuard>
-      <div className="h-screen bg-white transition-colors duration-300">
-      {/* CSS Grid Layout */}
-      <div
-        className="grid h-full transition-all duration-300 ease-out"
-        style={{
-          gridTemplateColumns: `
-            ${leftSidebarCollapsed ? '64px' : '280px'}
-            1fr
-            ${rightSidebarCollapsed ? '0px' : '320px'}
-          `,
-          gridTemplateRows: '64px 1fr',
-          gridTemplateAreas: `
-            "left-sidebar top-nav right-sidebar"
-            "left-sidebar main-content right-sidebar"
-          `
-        }}
-      >
-        {/* Top Navigation */}
-        <div
-          className="bg-white border-b border-gray-200 z-30"
-          style={{ gridArea: 'top-nav' }}
-          role="banner"
-          aria-label="Top navigation"
-        >
-          <TopNavigation />
-        </div>
+      {/* New Layout: Sidebar Full Height, Header to Right */}
+      <div className="h-screen bg-[var(--color-background)]">
 
-        {/* Left Sidebar */}
-        <div
-          className="bg-gray-50 border-r border-gray-200 z-20 overflow-hidden"
-          style={{ gridArea: 'left-sidebar' }}
-          role="navigation"
-          aria-label="Main navigation"
+        {/* Fixed Left Sidebar - Full Viewport Height */}
+        <aside
+          className={`fixed left-0 top-0 border-r border-[var(--color-border-subtle)] bg-[var(--color-background)] overflow-hidden transition-all ease-out ${
+            isMobile && !leftSidebarCollapsed ? 'z-[var(--z-index-modal)]' : ''
+          }`}
+          style={{
+            left: '0', // Explicitly ensure flush against left edge
+            width: leftSidebarCollapsed ? 'var(--sidebar-width-collapsed)' : 'var(--sidebar-width-expanded)',
+            height: '100vh',
+            transitionDuration: 'var(--duration-normal)',
+            transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)', // Smooth easing
+            transformOrigin: 'left center', // Fix animation origin
+            margin: '0', // Ensure no margins
+            padding: '0', // Ensure no padding
+            boxSizing: 'border-box', // Prevent layout shifts
+            willChange: 'width', // Optimize for width transitions
+            backfaceVisibility: 'hidden' // Prevent flickering
+          }}
         >
           <LeftSidebar
             collapsed={leftSidebarCollapsed}
-            isMobile={isMobile}
             onToggle={() => setLeftSidebarCollapsed(!leftSidebarCollapsed)}
+            isMobile={isMobile}
           />
-        </div>
+        </aside>
 
-        {/* Main Content Area */}
-        <div
-          className="bg-gray-50 overflow-auto z-10"
-          style={{ gridArea: 'main-content' }}
-        >
-          <main className="h-full" role="main" aria-label="Main content">
-            {children}
-          </main>
-        </div>
-
-        {/* Right Sidebar */}
-        {!rightSidebarCollapsed && (
-          <div
-            className="bg-white border-l border-gray-200 z-20 overflow-hidden"
-            style={{ gridArea: 'right-sidebar' }}
-            role="complementary"
-            aria-label="Contextual tools and information"
-          >
-            <RightSidebar
-              collapsed={rightSidebarCollapsed}
-              isMobile={isMobile}
-              activeSection={activeRightSection}
-            />
-          </div>
-        )}
-      </div>
-
-      {/* Right Sidebar Vertical Buttons */}
-      <RightSidebarButtons
-        onSectionChange={handleRightSectionChange}
-        activeSection={activeRightSection}
-      />
-
-      {/* Mobile Overlay */}
-      {isMobile && (!leftSidebarCollapsed || !rightSidebarCollapsed) && (
-        <div
-          className="fixed inset-0 bg-gray-900 bg-opacity-50 z-40 lg:hidden transition-opacity duration-300"
-          onClick={() => {
-            setLeftSidebarCollapsed(true)
-            setRightSidebarCollapsed(true)
+        {/* Fixed Header - Positioned to Right of Sidebar */}
+        <header
+          className="fixed top-0 right-0 bg-[var(--color-background)] border-b border-[var(--color-border-subtle)] transition-all ease-out"
+          style={{
+            left: leftSidebarCollapsed ? 'var(--sidebar-width-collapsed)' : 'var(--sidebar-width-expanded)',
+            height: 'var(--header-height)',
+            zIndex: 'var(--z-index-fixed)',
+            transitionDuration: 'var(--duration-normal)',
+            transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)', // Match sidebar easing
+            boxSizing: 'border-box', // Prevent layout shifts
+            willChange: 'left', // Optimize for position transitions
+            backfaceVisibility: 'hidden' // Prevent flickering
           }}
-        />
-      )}
+        >
+          <TopNavigation />
+        </header>
+
+        {/* Main Content Area - Positioned Below Header and to Right of Sidebar */}
+        <main
+          className="bg-[var(--color-surface)] transition-all ease-out hide-scrollbar overflow-auto"
+          style={{
+            marginLeft: leftSidebarCollapsed ? 'var(--sidebar-width-collapsed)' : 'var(--sidebar-width-expanded)',
+            marginRight: rightSidebarExpanded ? '360px' : '40px',
+            marginTop: 'var(--header-height)',
+            height: 'calc(100vh - var(--header-height))',
+            transitionDuration: 'var(--duration-normal)',
+            transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)', // Match sidebar easing
+            boxSizing: 'border-box', // Prevent layout shifts
+            willChange: 'margin-left, margin-right', // Optimize for margin transitions
+            backfaceVisibility: 'hidden', // Prevent flickering
+            position: 'relative', // Ensure proper positioning context
+            overflow: 'auto' // Ensure proper scrolling
+          }}
+          role="main"
+          aria-label="Main content"
+        >
+          {children || <DashboardSPARouter />}
+        </main>
+
+        {/* Fixed Right Sidebar */}
+        <UnifiedRightSidebar onLayoutChange={handleRightSidebarLayoutChange} />
+
+        {/* Mobile Overlay */}
+        {isMobile && !leftSidebarCollapsed && (
+          <div
+            className="fixed inset-0 bg-[var(--color-neutral-900)] transition-opacity lg:hidden"
+            style={{
+              opacity: 'var(--opacity-50)',
+              zIndex: 'var(--z-index-modal-backdrop)',
+              transitionDuration: 'var(--duration-normal)'
+            }}
+            onClick={() => setLeftSidebarCollapsed(true)}
+            aria-label="Close sidebar"
+          />
+        )}
       </div>
     </DashboardRouteGuard>
   )

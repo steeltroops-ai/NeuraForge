@@ -8,7 +8,7 @@ import {
   UserButton,
   useUser
 } from '@clerk/nextjs'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/design-system-button'
 
 export function ClerkAuthButtons() {
   return (

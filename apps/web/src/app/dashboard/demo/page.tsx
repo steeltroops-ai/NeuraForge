@@ -5,7 +5,7 @@ import { ResearchTreeVisualization } from '@/components/research/research-tree-v
 import { ExperimentTracker } from '@/components/research/experiment-tracker'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/design-system-button'
 import { Progress } from '@/components/ui/progress'
 import {
   mockProjects,

@@ -3,6 +3,7 @@
 import { ArrowRight, Brain, Zap, Network, Shield } from 'lucide-react'
 import Link from 'next/link'
 
+
 const features = [
   {
     icon: Brain,
@@ -32,30 +33,68 @@ const features = [
 
 export function ResearchFeaturesSection() {
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <section
+      className="bg-[var(--color-background)]"
+      style={{
+        paddingTop: 'var(--space-24)',
+        paddingBottom: 'var(--space-24)'
+      }}
+    >
+      <div
+        className="max-w-7xl mx-auto"
+        style={{
+          paddingLeft: 'var(--space-4)',
+          paddingRight: 'var(--space-4)'
+        }}
+      >
+        <div
+          className="grid grid-cols-1 lg:grid-cols-2"
+          style={{ gap: 'var(--space-16)' }}
+        >
           {features.map((feature) => (
             <div key={feature.title} className="group">
-              <div className="flex items-start space-x-4">
+              <div
+                className="flex items-start"
+                style={{ gap: 'var(--space-4)' }}
+              >
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-200">
-                    <feature.icon className="w-6 h-6 text-purple-600" />
+                  <div
+                    className="w-12 h-12 bg-[var(--color-primary-100)] flex items-center justify-center group-hover:bg-[var(--color-primary-200)] transition-colors"
+                    style={{
+                      borderRadius: 'var(--radius-lg)',
+                      transitionDuration: 'var(--duration-fast)'
+                    }}
+                  >
+                    <feature.icon className="w-6 h-6 text-[var(--color-primary-600)]" />
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors duration-200">
+                  <h3
+                    className="font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-primary-600)] transition-colors"
+                    style={{
+                      fontSize: 'var(--font-size-xl)',
+                      marginBottom: 'var(--space-4)',
+                      transitionDuration: 'var(--duration-fast)'
+                    }}
+                  >
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed mb-6">
+                  <p
+                    className="leading-relaxed text-[var(--color-text-secondary)]"
+                    style={{ marginBottom: 'var(--space-6)' }}
+                  >
                     {feature.description}
                   </p>
-                  <Link 
+                  <Link
                     href={feature.href}
-                    className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium transition-colors duration-200"
+                    className="inline-flex items-center text-[var(--color-primary-600)] hover:text-[var(--color-primary-700)] font-medium transition-colors"
+                    style={{ transitionDuration: 'var(--duration-fast)' }}
                   >
                     Learn more
-                    <ArrowRight className="ml-2 w-4 h-4" />
+                    <ArrowRight
+                      className="w-4 h-4"
+                      style={{ marginLeft: 'var(--space-2)' }}
+                    />
                   </Link>
                 </div>
               </div>
