@@ -1,18 +1,25 @@
 'use client'
 
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useUser, useAuth as useClerkAuth } from '@clerk/nextjs'
 import {
   AuthContextType,
   User,
   SignInCredentials,
-  SignUpCredentials,
-  AuthStatus
+  SignUpCredentials
 } from '@/types/auth'
 
 // Helper function to convert Clerk user to our User type
-const convertClerkUser = (clerkUser: any): User => {
+const convertClerkUser = (clerkUser: {
+  id: string;
+  emailAddresses?: Array<{ emailAddress: string }>;
+  fullName?: string | null;
+  firstName?: string | null;
+  imageUrl?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}): User => {
   return {
     id: clerkUser.id,
     email: clerkUser.emailAddresses?.[0]?.emailAddress || '',
@@ -37,13 +44,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Convert Clerk user to our User type
   const user = clerkUser ? convertClerkUser(clerkUser) : null
 
-  const signIn = async (credentials: SignInCredentials) => {
+  const signIn = async (_credentials: SignInCredentials) => {
     // Clerk handles sign-in through its components, so this is mainly for compatibility
     setError('Please use the Sign In button to authenticate')
     throw new Error('Please use the Sign In button to authenticate')
   }
 
-  const signUp = async (credentials: SignUpCredentials) => {
+  const signUp = async (_credentials: SignUpCredentials) => {
     // Clerk handles sign-up through its components, so this is mainly for compatibility
     setError('Please use the Sign In button to create an account')
     throw new Error('Please use the Sign In button to create an account')
@@ -54,7 +61,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       await clerkSignOut()
       // Redirect to homepage after successful sign out
       router.push('/')
-    } catch (error) {
+    } catch {
       setError('Sign out failed')
     }
   }
